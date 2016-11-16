@@ -1,5 +1,6 @@
 #include "gameslot.h"
 #include "ui_gameslot.h"
+#include "player.h"
 #include <QString>
 #include <QRect>
 #include <QPainter>
@@ -10,9 +11,15 @@ gameslot::gameslot(QWidget *parent) :
     ui(new Ui::gameslot)
 {
     ui->setupUi(this);
-    slot(0,0,200,200);
+    slot.setRect(0,0,200,200);
     name = "default";
-    owner_name = "bank";
+    owner = Player();
+    houselevel = 0;
+    land_price = 0;
+    paid_price = 0;
+    slot_no = 0;
+    upgradable = false;
+    buildHouse = 0;
 }
 
 gameslot::~gameslot()
@@ -32,7 +39,7 @@ void gameslot::paintEvent(QPaintEvent *e)
 
 void gameslot::setSlot(int x, int y)
 {
-    slot(x,y,200,200);
+    slot.setRect(x,y,200,200);
     return;
 }
 
@@ -42,9 +49,9 @@ void gameslot::setName(QString s)
     return;
 }
 
-void gameslot::setOwner(QString user)
+void gameslot::setOwner(Player user)
 {
-    owner_name = user;
+    owner = user;
     return;
 }
 
@@ -54,19 +61,53 @@ void gameslot::setPrice(int p)
     return;
 }
 
+void gameslot::setNum(int n)
+{
+    slot_no = n;
+    return;
+}
+
+void gameslot::setPaidPrice(int p)
+{
+    paid_price = p;
+    return;
+}
+
+void gameslot::setUpgrade()
+{
+    upgradable = true;
+}
+
+void gameslot::setHouse()
+{
+    houselevel += 1;
+    return;
+}
+
+void gameslot::setBuild(int b)
+{
+    buildHouse = b;
+    return;
+}
+
 QString gameslot::getName()
 {
     return name;
 }
 
-QString gameslot::getOwner()
+Player gameslot::getOwner()
 {
-    return owner_name;
+    return owner;
 }
 
 int gameslot::getPrice()
 {
     return land_price;
+}
+
+int gameslot::getPaidPrice()
+{
+    return paid_price;
 }
 
 QVector<int> gameslot::getCoord()
@@ -75,4 +116,24 @@ QVector<int> gameslot::getCoord()
     result.push_back(slot.x());
     result.push_back(slot.y());
     return result;
+}
+
+int gameslot::getSlot()
+{
+    return slot_no;
+}
+
+bool gameslot::getUpgrade()
+{
+    return upgradable;
+}
+
+int gameslot::getHouse()
+{
+    return houselevel;
+}
+
+int gameslot::getBuild()
+{
+    return buildHouse;
 }

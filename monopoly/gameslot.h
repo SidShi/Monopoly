@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QString>
 #include <QRect>
+#include "player.h"
 
 namespace Ui {
 class gameslot;
@@ -22,20 +23,35 @@ public:
 
     void setSlot(int x, int y);
     void setName(QString s);
-    void setOwner(QString user);
+    void setOwner(Player user);
     void setPrice(int p);
+    void setNum(int n);
+    void setPaidPrice(int p);
+    void setUpgrade();
+    void setHouse();
+    void setBuild(int b);
 
     QString getName();
-    QString getOwner();
+    Player getOwner();
     int getPrice();
     QVector<int> getCoord();
+    int getPaidPrice();
+    int getSlot();
+    bool getUpgrade();
+    int getHouse();
+    int getBuild();
 
 private:
     Ui::gameslot *ui;
     QString name;
     QRect slot;
-    QString owner_name;
+    Player owner;
     int land_price;
+    int paid_price;
+    int houselevel;
+    int slot_no;
+    bool upgradable;
+    int buildHouse;
 };
 
 #endif // GAMESLOT_H

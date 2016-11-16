@@ -15,12 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         monopoly.cpp \
     gameslot.cpp \
-    player.cpp
+    player.cpp \
+    chance.cpp
 
 HEADERS  += monopoly.h \
     gameslot.h \
-    player.h
+    player.h \
+    chance.h
 
 FORMS    += monopoly.ui \
     gameslot.ui \
-    player.ui
+    player.ui \
+    chance.ui
