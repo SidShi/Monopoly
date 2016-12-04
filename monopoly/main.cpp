@@ -435,7 +435,7 @@ int main(int argc, char *argv[])
 
 
 
-/*
+
     // make sure how many players are there
     QVector<Player> pla;
     int min_mon;
@@ -471,6 +471,6 @@ int main(int argc, char *argv[])
         }
     }
 
-*/
+
     return a.exec();
 }
