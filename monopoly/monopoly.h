@@ -6,6 +6,8 @@
 #include <QString>
 #include <QVector>
 #include "gameslot.h"
+#include "chance.h"
+#include "player.h"
 
 namespace Ui {
 class monopoly;
@@ -18,6 +20,8 @@ class monopoly : public QMainWindow
 public:
     explicit monopoly(QWidget *parent = 0);
     ~monopoly();
+
+
 
 
 

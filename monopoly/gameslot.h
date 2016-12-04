@@ -6,10 +6,14 @@
 #include <QString>
 #include <QRect>
 #include "player.h"
+#include "chance.h"
 
 namespace Ui {
 class gameslot;
 }
+
+class Player;
+class chance;
 
 class gameslot : public QWidget
 {
@@ -17,13 +21,14 @@ class gameslot : public QWidget
 
 public:
     explicit gameslot(QWidget *parent = 0);
+    gameslot(const gameslot& b);
     ~gameslot();
 
     void paintEvent (QPaintEvent *e);
 
     void setSlot(int x, int y);
     void setName(QString s);
-    void setOwner(Player user);
+    void setOwner(Player* user);
     void setPrice(int p);
     void setNum(int n);
     void setPaidPrice(int p);
@@ -32,7 +37,7 @@ public:
     void setBuild(int b);
 
     QString getName();
-    Player getOwner();
+    Player* getOwner();
     int getPrice();
     QVector<int> getCoord();
     int getPaidPrice();
@@ -45,7 +50,7 @@ private:
     Ui::gameslot *ui;
     QString name;
     QRect slot;
-    Player owner;
+    Player* owner;
     int land_price;
     int paid_price;
     int houselevel;

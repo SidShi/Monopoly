@@ -3,10 +3,14 @@
 
 #include <QWidget>
 #include <QString>
+#include "gameslot.h"
 
 namespace Ui {
 class chance;
 }
+
+class gameslot;
+class Player;
 
 class chance : public QWidget
 {
@@ -14,21 +18,22 @@ class chance : public QWidget
 
 public:
     explicit chance(QWidget *parent = 0);
+    chance(const chance& b);
     ~chance();
 
     void setChance(QString s);
     void setMoneyC(int m);
-    void setPositionC(int p);
+    void setPositionC(gameslot* p);
 
     QString getChance();
     int getMoneyC();
-    int getPositionC();
+    gameslot* getPositionC();
 
 private:
     Ui::chance *ui;
     QString chance_name;
     int money_change;
-    int position_numC;
+    gameslot* position_numC;
 };
 
 #endif // CHANCE_H

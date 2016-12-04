@@ -13,7 +13,7 @@ gameslot::gameslot(QWidget *parent) :
     ui->setupUi(this);
     slot.setRect(0,0,200,200);
     name = "default";
-    owner = Player();
+    owner = new Player;
     houselevel = 0;
     land_price = 0;
     paid_price = 0;
@@ -22,9 +22,34 @@ gameslot::gameslot(QWidget *parent) :
     buildHouse = 0;
 }
 
+gameslot::gameslot(const gameslot& b)
+{
+    slot.setRect(b.slot.x(),b.slot.y(),b.slot.width(),b.slot.height());
+    name = b.name;
+    houselevel = b.houselevel;
+    land_price = b.land_price;
+    paid_price = b.paid_price;
+    slot_no = b.slot_no;
+    upgradable = b.upgradable;
+    buildHouse = b.buildHouse;
+    if (b.owner == NULL)
+    {
+        owner = NULL;
+    }
+    else
+    {
+        if (owner != NULL)
+        {
+            delete owner;
+        }
+        owner = new Player(*b.owner);
+    }
+}
+
 gameslot::~gameslot()
 {
     delete ui;
+    delete owner;
 }
 
 void gameslot::paintEvent(QPaintEvent *e)
@@ -49,7 +74,7 @@ void gameslot::setName(QString s)
     return;
 }
 
-void gameslot::setOwner(Player user)
+void gameslot::setOwner(Player* user)
 {
     owner = user;
     return;
@@ -95,7 +120,7 @@ QString gameslot::getName()
     return name;
 }
 
-Player gameslot::getOwner()
+Player* gameslot::getOwner()
 {
     return owner;
 }
