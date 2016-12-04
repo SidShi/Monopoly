@@ -2,17 +2,16 @@
 Project for PIC 10C (Monopoly Game)
 
 # Attribution
-Copyright: Public domain.  
-Filename: player.h, player.cpp, player.ui, gameslot.h, gameslot.cpp, gameslot.ui, chance.h, chance.cpp, monopoly.h, monopoly.cpp,  
-          monopoly.ui, main.cpp, monopoly.pro  
-Purpose: This project aims to simulate the game Monopoly, when UI finished users can play the game  
-player.h, player.cpp and player.ui are for the class Player and functions associated with behaviors of players in games  
-gameslot.h, gameslot.cpp and gameslot.ui are for the class and functions in charge of the game board  
-chance.h, chance.cpp, chance.ui contain class and functions for the Chance and Community Chest cards  
-main.cpp is the main program and contains unit tests  
-Assembler: SidShi  
-Contact: Tianyi Shi shitianyisid@gmail.com  
-Last update: 12/4/2016  
+- Copyright: Public domain.  
+- Filename: player.h, player.cpp, player.ui, gameslot.h, gameslot.cpp, gameslot.ui, chance.h, chance.cpp, monopoly.h, monopoly.cpp, monopoly.ui, main.cpp, monopoly.pro  
+- Purpose: This project aims to simulate the game Monopoly, when UI finished users can play the game  
+- player.h, player.cpp and player.ui are for the class Player and functions associated with behaviors of players in games  
+- gameslot.h, gameslot.cpp and gameslot.ui are for the class and functions in charge of the game board  
+- chance.h, chance.cpp, chance.ui contain class and functions for the Chance and Community Chest cards  
+- main.cpp is the main program and contains unit tests  
+- Assembler: SidShi  
+- Contact: Tianyi Shi shitianyisid@gmail.com  
+- Last update: 12/4/2016  
 
 # Unit tests
 1. Player lands on the correct slot when dice rolled & rolling counter works well  
