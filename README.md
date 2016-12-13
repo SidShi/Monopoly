@@ -1,5 +1,6 @@
 # Monopoly
-Project for PIC 10C (Monopoly Game)
+Project for PIC 10C (Monopoly Game)  
+The current version does not have a UI. The project right now contains plenty of unit tests and can display how the game runs on the console  
 
 # Attribution
 - Copyright: Public domain.  
