@@ -26,6 +26,7 @@ public:
 
     void paintEvent (QPaintEvent *e);
 
+    // setters
     void setSlot(int x, int y);
     void setName(QString s);
     void setOwner(Player* user);
@@ -36,6 +37,7 @@ public:
     void setHouse();
     void setBuild(int b);
 
+    // getters
     QString getName();
     Player* getOwner();
     int getPrice();
@@ -51,11 +53,17 @@ private:
     QString name;
     QRect slot;
     Player* owner;
+    // land purchasing price
     int land_price;
+    // when owned, money other players need to pay to the owner
     int paid_price;
+    // number of houses on the property
     int houselevel;
+    // associated with the board
     int slot_no;
+    // whether the land can build houses
     bool upgradable;
+    // money for building a house
     int buildHouse;
 };
 

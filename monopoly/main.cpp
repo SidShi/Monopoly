@@ -14,8 +14,9 @@ int main(int argc, char *argv[])
     bank.setName("bank");
     bank.money_change(15000);
 
+    // set up the board
     QVector<gameslot> board(40);
-    for (int i = 0; i < 40; i++)
+    for (size_t i = 0; i < 40; ++i)
     {
         board[i].setNum(i+1);
         board[i].setOwner(&bank);
@@ -153,9 +154,9 @@ int main(int argc, char *argv[])
     board[39].setUpgrade();
 
 
-
+    // set up the chance cards
     QVector<chance*> cha(18);
-    for (int i = 0; i < 18; i++)
+    for (size_t i = 0; i < 18; ++i)
     {
         cha[i] = new chance;
     }
@@ -194,8 +195,9 @@ int main(int argc, char *argv[])
     cha[17]->setChance("Get out of jail free card");
 
 
+    // set up the Community Chest cards
     QVector<chance*> com(17);
-    for (int i = 0; i < 17; i++)
+    for (size_t i = 0; i < 17; ++i)
     {
         com[i] = new chance;
     }
@@ -232,6 +234,9 @@ int main(int argc, char *argv[])
     com[15]->setMoneyC(100);
     com[16]->setChance("Get Out of Jail Free Card");
 
+
+
+    // UNIT TESTS! see followed document to find out what the tests are for
     /*
     qsrand(1);
     int xxx = qrand()%6+1;
@@ -436,40 +441,53 @@ int main(int argc, char *argv[])
 
 
 
-    // make sure how many players are there
-    QVector<Player> pla;
-    int min_mon;
-    min_mon = pla[1].getMoney();
-    for (int i = 1; i < pla.length(); i++)
+
+    // GAME PROCESS
+    // manually set up player for testing
+    QVector<Player*> pla;
+    Player* user1 = new Player;
+    Player* user2 = new Player;
+    user1->setName("user1");
+    user2->setName("user2");
+    pla.push_back(user1);
+    pla.push_back(user2);
+
+    // Game continues when there are more than one player remaining
+    while (pla.length() > 1)
     {
-        if (pla[i].getMoney() < min_mon)
+        for (size_t i = 0; i < pla.length(); i++)
         {
-            min_mon = pla[i].getMoney();
-        }
-    }
-    while (min_mon > 0)
-    {
-        for (int i = 0; i < pla.length(); i++)
-        {
-            int prev = pla[i].getSl();
-            pla[i].rolling_dice();
-            pla[i].landing_option(board[prev-1],board[pla[i].getSl()-1]);
-            while (pla[i].getRollingC() > 0)
+            qDebug() << pla[i]->getPlayer() << "'s turn!\n";
+            qDebug() << "Current money: " << pla[i]->getMoney() << endl;
+
+            // one turn and one roll
+            int prev = pla[i]->getSl();
+            pla[i]->rolling_dice();
+            pla[i]->landing_option(board[prev-1],board[pla[i]->getSl()-1],com,cha);
+
+            // if doubles rolled
+            while (pla[i]->getRollingC() > 0)
             {
-                int prev1 = pla[i].getSl();
-                pla[i].rolling_dice();
-                pla[i].landing_option(board[prev1-1],board[pla[i].getSl()-1]);
+                qDebug() << "Doubles rolled! Have another roll!\n";
+                int prev1 = pla[i]->getSl();
+                pla[i]->rolling_dice();
+                pla[i]->landing_option(board[prev1-1],board[pla[i]->getSl()-1],com,cha);
             }
-        }
-        min_mon = pla[1].getMoney();
-        for (int i = 1; i < pla.length(); i++)
-        {
-            if (pla[i].getMoney() < min_mon)
+            qDebug() << pla[i]->getPlayer() << " turn ends\n";
+            qDebug() << "Money owned after the round is: " << pla[i]->getMoney() << endl;
+
+            // if money less than 0, loses, remove the player
+            if (pla[i]->getMoney() < 0)
             {
-                min_mon = pla[i].getMoney();
+                qDebug() << pla[i]->getPlayer() << " loses!\n";
+                pla.remove(i);
             }
+
         }
+
     }
+
+    qDebug() << pla[0]->getPlayer() << "wins!\n";
 
 
     return a.exec();

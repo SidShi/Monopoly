@@ -21,10 +21,12 @@ public:
     chance(const chance& b);
     ~chance();
 
+    // setters
     void setChance(QString s);
     void setMoneyC(int m);
     void setPositionC(gameslot* p);
 
+    // getters
     QString getChance();
     int getMoneyC();
     gameslot* getPositionC();
@@ -32,7 +34,9 @@ public:
 private:
     Ui::chance *ui;
     QString chance_name;
+    // Money changes associated with the cards
     int money_change;
+    // Destinations where the cards will move the players to
     gameslot* position_numC;
 };
 
